@@ -24,23 +24,57 @@
 <div class="w3-container full-screen-form">
     <div class="w3-card-4 form-container">
         <header class="w3-container w3-teal">
-            <h1>Formulario de Contacto</h1>
+            <h1>Formulario de Contacto - Procesado</h1>
         </header>
 
         <div class="w3-container">
-            <form action="procesar.php" method="get" class="w3-form">
+            <?php
+            echo "Valores del GET" . json_encode($_GET); //json_encode()
+
+            echo '<h2 class="w3-text-red ">Procesando valores:</h2>';
+
+            $nombre = isset($_GET["nombre"]) && $_GET["nombre"] != ""?$_GET["nombre"]: 'Sin nombre';
+            $fecha_nacimiento = isset($_GET["fecha_nacimiento"]) && $_GET["fecha_nacimiento"] != ""?$_GET["fecha_nacimiento"]: 'Sin fecha de nacimiento';
+            $email = isset($_GET["email"])&& $_GET["email"] != ""?$_GET["email"]: 'Sin email';
+            $superpoder= isset($_GET["superpoder"])&& $_GET["superpoder"] != ""?$_GET["superpoder"]: 'Sin superpoder';
+
+            echo '<div class="w3-section">
+                        <label for="name">Nombre:</label>
+                        '. $nombre.'
+                    </div>
+                    <div class="w3-section">
+                        <label for="fecha_nacimiento">Fecha de nacimiento:</label>
+                        '. $fecha_nacimiento .'
+                    </div>
+                    <div class="w3-section">
+                        <label for="email">Email:</label>
+                        '. $email.'
+                    </div>
+                    <div class="w3-section">
+                        <label for="superpoder">superpoder:</label>
+                        '. $superpoder.'
+                    </div>
+                    '
+            ?>
+            <!---
+            <form
+                action="procesar.php"
+                method="get" class="w3-form">
                 <div class="w3-row-padding">
                     <div class="w3-col s12 m6 l6">
                         <label for="name">Nombre:</label>
-                        <input class="w3-input w3-border" type="text" id="name" name="name" required>
+                        <input class="w3-input w3-border"
+                               type="text" id="name" name="name" required>
                     </div>
                     <div class="w3-col s12 m6 l6">
                         <label for="name">Fecha de nacimiento:</label>
-                        <input class="w3-input w3-border" type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+                        <input class="w3-input w3-border"
+                               type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
                     </div>
                     <div class="w3-col s12 m6 l6">
                         <label for="email">Correo Electrónico:</label>
-                        <input class="w3-input w3-border" type="email" id="email" name="email" required>
+                        <input class="w3-input w3-border"
+                               type="email" id="email" name="email" required>
                     </div>
                     <div class="w3-col s12 m6 l6">
                         <label for="superpoder">Superpoder Deseado:</label>
@@ -55,7 +89,7 @@
 
                     <div class="w3-col s12 m6 l12">
                         <label for="paises">Países donde operar:</label>
-                        <select id="paises" name="paises[]" class="w3-select w3-border" multiple>
+                        <select id="paises" name="paises" class="w3-select w3-border" multiple>
                             <option value="argentina">Argentina</option>
                             <option value="mexico">México</option>
                             <option value="españa">España</option>
@@ -77,6 +111,7 @@
                     </div>
                 </div>
             </form>
+            -->
         </div>
     </div>
 </div>
@@ -84,9 +119,3 @@
 </body>
 </html>
 
-
-<?php
-
-
-
-?>
