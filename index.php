@@ -35,7 +35,7 @@
                         <input class="w3-input w3-border" type="text" id="name" name="name" required>
                     </div>
                     <div class="w3-col s12 m6 l6">
-                        <label for="name">Fecha de nacimiento:</label>
+                        <label for="fecha_nacimiento">Fecha de nacimiento:</label>
                         <input class="w3-input w3-border" type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
                     </div>
                     <div class="w3-col s12 m6 l6">
@@ -58,7 +58,7 @@
                         <select id="paises" name="paises[]" class="w3-select w3-border" multiple>
                             <option value="argentina">Argentina</option>
                             <option value="mexico">México</option>
-                            <option value="españa">España</option>
+                            <option value="belgica">Belgica</option>
                             <option value="colombia">Colombia</option>
                         </select>
 

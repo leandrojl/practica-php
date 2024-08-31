@@ -33,28 +33,56 @@
 
             echo '<h2 class="w3-text-red ">Procesando valores:</h2>';
 
-            $nombre = isset($_GET["nombre"]) && $_GET["nombre"] != ""?$_GET["nombre"]: 'Sin nombre';
-            $fecha_nacimiento = isset($_GET["fecha_nacimiento"]) && $_GET["fecha_nacimiento"] != ""?$_GET["fecha_nacimiento"]: 'Sin fecha de nacimiento';
-            $email = isset($_GET["email"])&& $_GET["email"] != ""?$_GET["email"]: 'Sin email';
-            $superpoder= isset($_GET["superpoder"])&& $_GET["superpoder"] != ""?$_GET["superpoder"]: 'Sin superpoder';
+            function extractGetParameterOfDefault($param, $defaultValue) {
+                return isset($_GET[$param])? $_GET[$param] : $defaultValue;
+            }
+
+            function validarElGetParameterYMostrar($paises)
+            {
+                if(is_string($paises)){
+                   echo $paises;
+                }else{
+                    mostrarResultadoDePaises($paises);
+                }
+            }
+            function mostrarResultadoDePaises($paises)
+            {
+                foreach($paises as $pais){
+                    echo '</br>'. $pais ;
+                }
+            }
 
             echo '<div class="w3-section">
                         <label for="name">Nombre:</label>
-                        '. $nombre.'
+                        '. extractGetParameterOfDefault("name", "sin nombre").'
                     </div>
                     <div class="w3-section">
                         <label for="fecha_nacimiento">Fecha de nacimiento:</label>
-                        '. $fecha_nacimiento .'
+                        '. extractGetParameterOfDefault("fecha_nacimiento", "sin fecha de nacimiento") .'
                     </div>
                     <div class="w3-section">
                         <label for="email">Email:</label>
-                        '. $email.'
+                        '. extractGetParameterOfDefault("email", "sin email").'
                     </div>
                     <div class="w3-section">
                         <label for="superpoder">superpoder:</label>
-                        '. $superpoder.'
-                    </div>
-                    '
+                        '. extractGetParameterOfDefault("superpoder", "sin superpoder").'
+                    </div>';
+
+            echo '<div class="w3-section">
+                        <label for="paises">Pais:</label>';
+                        $paises = extractGetParameterOfDefault("paises", "sin paises");
+                        validarElGetParameterYMostrar($paises);
+                        //var_dump('soy var dump:'. $paises); // Muestra el tipo de dato y el valor
+
+                        //print_r('soy print r:'.$paises);
+
+
+
+
+
+                   echo '</div>'
+
             ?>
             <!---
             <form
