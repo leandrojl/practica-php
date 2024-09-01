@@ -1,4 +1,28 @@
+<?php
 
+  $capas =  extractGetParameterOfDefault("capa", "La capa no fue seleccionada");
+  $colores = extractGetParameterOfDefault("color", "No selecciono colores");
+  var_dump($colores);
+  $validacionColores = validarElGetParameterYMostrar($colores);
+
+  echo json_encode($_FILES);
+
+
+  $files = json_encode($_FILES);
+
+  if(isset($_FILES["avatar"]) &&
+           $_FILES["avatar"]["error"] != 0 &&
+           $_FILES["avatar"]["size"] > 0 &&
+           $_FILES["avatar"]["type"] == "image\/png"){
+    move_uploaded_file($_FILES["avatar"]["tmp_name"], "img/" . $_FILES["avatar"]["name"]); //con esta funcion muevo el archivo temporal a una ruta local
+
+      $nombreRuta = random_int(0,10000000) .  $_FILES["avatar"]["name"]; //le asigno un valor random al archivo para no pisarlo
+
+      //arreglar el path dependiendo el directorio -IMPORTANTE-
+    $rutaImagen = "img/" . $nombreRuta; //defino la ruta donde va a estar el archivo que subi mediante post
+    echo "imagen subida correctamente";
+  }
+    ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -29,26 +53,29 @@
 
         <div class="w3-container">
             <?php
-            echo "Valores del GET" . json_encode($_GET); //json_encode()
+            echo "Valores del POST" . json_encode($_POST); //json_encode()
 
             echo '<h2 class="w3-text-red ">Procesando valores:</h2>';
 
             function extractGetParameterOfDefault($param, $defaultValue) {
-                return isset($_GET[$param])? $_GET[$param] : $defaultValue;
+                //isset pregunta si el metodo GET en el espacio del array correspondiente a la clave que viaje en $param si tiene algun valor
+                //si es asi, muestra, sino muestra el valor por default
+                return isset($_POST[$param])? $_POST[$param] : $defaultValue;
             }
 
-            function validarElGetParameterYMostrar($paises)
+            function validarElGetParameterYMostrar($arrayDeDatos)
             {
-                if(is_string($paises)){
-                   echo $paises;
+                if(empty($arrayDeDatos) || is_string($arrayDeDatos)){
+                   return "No hay datos seleccionados";
                 }else{
-                    mostrarResultadoDePaises($paises);
+                    mostrarResultadoDeArrayDeDatos($arrayDeDatos);
                 }
             }
-            function mostrarResultadoDePaises($paises)
+            //no estoy separando el php del html si imprimo en las funciones de php el codigo html
+            function mostrarResultadoDeArrayDeDatos($arrayDeDatos)
             {
-                foreach($paises as $pais){
-                    echo '</br>'. $pais ;
+                foreach($arrayDeDatos as $dato){
+                    echo '</br>'. $dato ;
                 }
             }
 
@@ -68,22 +95,41 @@
                         <label for="superpoder">superpoder:</label>
                         '. extractGetParameterOfDefault("superpoder", "sin superpoder").'
                     </div>';
+            echo    '<div class="w3-section">
+                            <label for="message">Mensaje:</label>
+                            '. extractGetParameterOfDefault("message", "sin mensaje").'
+                     </div>';
 
             echo '<div class="w3-section">
                         <label for="paises">Pais:</label>';
-                        $paises = extractGetParameterOfDefault("paises", "sin paises");
-                        validarElGetParameterYMostrar($paises);
                         //var_dump('soy var dump:'. $paises); // Muestra el tipo de dato y el valor
-
                         //print_r('soy print r:'.$paises);
-
-
-
-
+                        $paises = extractGetParameterOfDefault("paises", []);
+                        validarElGetParameterYMostrar($paises);
 
                    echo '</div>'
 
             ?>
+            <div class="w3-section">
+                <label for="capa">Capa:
+
+                    <?php
+                    echo $capas;
+                    ?>
+                </label>
+
+            </div>
+            <div class="w3-section">
+                <label for="color">Colores:
+
+                    <?php
+                    echo $validacionColores;
+                    ?>
+                </label>
+
+            </div>
+
+
             <!---
             <form
                 action="procesar.php"

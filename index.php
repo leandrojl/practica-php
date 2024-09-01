@@ -28,7 +28,10 @@
         </header>
 
         <div class="w3-container">
-            <form action="procesar.php" method="get" class="w3-form">
+            <form action="procesar.php"
+                  method="post"
+                  enctype="multipart/form-data"
+                  class="w3-form">
                 <div class="w3-row-padding">
                     <div class="w3-col s12 m6 l6">
                         <label for="name">Nombre:</label>
@@ -64,6 +67,38 @@
 
                     </div>
 
+                    <div class="w3-col s12 m6 l12">
+                        <label for="capa">Tipo de capa:
+                            <input type="radio" name="capa" value="capa larga">Capa Larga
+                            <input type="radio" name="capa" value="capa corta">Capa Corta
+                            <input type="radio" name="capa" value="sin capa">Sin Capa
+
+
+                        </label>
+
+
+                    </div>
+
+                    <div class="w3-col s12 m6 l12">
+                        <label for="color">Color preferido:
+                            <input type="checkbox" name="color[]" value="rojo">Rojo
+                            <input type="checkbox" name="color[]" value="rojo">Azul
+                            <input type="checkbox" name="color[]" value="rojo">Negro
+
+
+                        </label>
+
+
+                    </div>
+
+                </div>
+                <div class="w3-row-padding">
+                    <div class="w3-col s12">
+                        <label for="message">Suba el archivo:
+                            <input type="file" name="avatar">
+                        </label>
+
+                    </div>
                 </div>
                 <div class="w3-row-padding">
                     <div class="w3-col s12">
@@ -77,6 +112,17 @@
                     </div>
                 </div>
             </form>
+
+<!--            $_POST = array(-->
+<!--            "name" => "El nombre ingresado",-->
+<!--            "fecha_nacimiento" => "La fecha seleccionada",-->
+<!--            "email" => "El correo ingresado",-->
+<!--            "superpoder" => "El superpoder seleccionado",-->
+<!--            "paises" => array("argentina", "mexico"), // si se seleccionaron varios-->
+<!--            "capa" => "El valor seleccionado",-->
+<!--            "message" => "El mensaje ingresado"-->
+<!--            );-->
+
         </div>
     </div>
 </div>
